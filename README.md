@@ -1,3 +1,3 @@
-# Clean Dotnet Code
+# Dotnet Core Authentication and Authorization
 
-Create a Dotnet Core project following a clean architecture and using the best tools.
+The repository illustrats the .Net core authentication and authorization, from understant of basic, OAuth with Open ID connect and working with IdentityServer4.
