@@ -1,0 +1,10 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Welcome to your application @Model.UserName</h1>
+<div>
+    @Html.ActionLink("Logout", "Logout", "Home")
+</div>
+

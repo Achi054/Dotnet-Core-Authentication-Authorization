@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<h1>SignIn</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.10.1/oidc-client.min.js"></script>
+<script>
+    var userManager = new Oidc.UserManager({
+        userStore: new Oidc.WebStorageStateStore({ store: window.localStorage })
+    });
+    userManager.signinCallback().then(res => {
+        window.location.href = '/home/index';
+    });
+</script>
