@@ -33,7 +33,7 @@ namespace Weather.IDP
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("weatherapi", "Weather API Scope", new [] { "role" }),
+                new ApiScope("weatherapi", "Weather API Scope"),
             };
 
         public static IEnumerable<Client> Clients =>
@@ -71,35 +71,42 @@ namespace Weather.IDP
 
                     },
                     RequirePkce = true,
+                    AllowOfflineAccess = true,
                 },
                 new Client
                 {
-                    AccessTokenLifetime = 120,
-                    UpdateAccessTokenClaimsOnRefresh = true,
-                    RefreshTokenExpiration = TokenExpiration.Sliding,
-                    SlidingRefreshTokenLifetime = 120,
                     ClientName = "Weather API",
                     ClientId = "78752A3E-4FE3-4694-A9BD-F439F22B10B8",
                     ClientSecrets =
                     {
                         new Secret("apisecret".Sha256())
                     },
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris =
-                    {
-                        "https://localhost:44314/signin-oidc",
-                    },
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.Address,
-                        "roles",
                         "weatherapi",
-                        "country",
-                        "subscriptionlevel",
                     },
-                    RequirePkce = true,
+                },
+                new Client
+                {
+                    ClientName = "Weather SPA Client",
+                    ClientId = "7CD1FB74-ADD8-4E4E-B6A0-39CBA7AAF660",
+                    ClientSecrets =
+                    {
+                        new Secret("spasecret".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris =           { "https://localhost:44338/callback.html" },
+                    PostLogoutRedirectUris = { "https://localhost:44338/index.html" },
+                    AllowedCorsOrigins =     { "https://localhost:44338" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "weatherapi",
+                    },
                 }
             };
     }
